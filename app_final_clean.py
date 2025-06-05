@@ -39,10 +39,10 @@ def get_lat_lng_kakao(주소):
  URL = "https://dapi.kakao.com/v2/local/search/address.json "
  헤더 = {"권한 부여": f"KakaoAK {KAKAO_API_KEY}"}
  매개변수 = {"query": 주소}
- 응답 = requests.get(url, 헤더=headers, 파람=파람)
- if response.status_code == 200이고 response.json ()['documents']:
- doc = 응답.json ()['documents'][0]
- 반환 플로트(doc[y']), 플로트(doc['x']) # 위도, 경도
+ 응답 = 요청.get(url, 헤더=headers, 파람=파람)
+ if response.status_code == 200 이고 response.json ()['documents']:
+ 문서 = 응답.json ()['documents'][0]
+ 반환 플로트(doc['y']), 플로트(doc['x']) # 위도, 경도
  없음, 없음 반환
 
 
