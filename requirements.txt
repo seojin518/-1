@@ -1,0 +1,8 @@
+
+streamlit
+pandas
+requests
+folium
+konlpy
+scikit-learn
+streamlit-folium
