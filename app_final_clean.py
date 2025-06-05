@@ -58,27 +58,27 @@ if st.button("🚀 트윗 수집 및 분석 시작"):
  헤더 = {"권한 부여": f"베어러 {BEARER_TOKEN}"}
  URL = "https://api.twitter.com/2/tweets/search/recent "
  매개변수 = {
- "query": f({query}) lang:ko -is:retweet",
+ "query": f"{query} lang:ko -is:retweet",
  "max_results": 10,
- tweet.필드": "created_at,text"
+ 트윗.필드": "created_at,text"
  }
 
- 응답 = requests.get(url, 헤더=headers, 파람=파람)
+ 응답 = 요청.get(url, 헤더=headers, 파람=파람)
  if response.status_code!= 200:
  st.error("❌ 트윗 수집 실패")
  그렇지 않으면:
- 트윗 = 응답.json ().get ("data", [])
+ 트윗 = 응답.json ()을 가져옵니다 ("데이터", [])
  위치, 선반, 텍스트, 위험 = [], [], [], []
- okt = okt()
+ okt = okt ()
 
  트윗에 대한 트윗:
  텍스트 = 트윗 ['텍스트']
  명사 = okt.nouns(텍스트)
- filtered_nouns = [명사에서 n의 경우 len(n) >= 2]
+ 필터링된_nouns = [명사에서 n 의 경우 렌(n) >= 2]
 
- filtered_nouns의 명사에 대해:
+ 필터링된_nouns의 명사에 대해:
  lat, lng = get_lat_lng_kakao(noun)
- lat 및 lng인 경우:
+ 라트 및 LNG 인 경우:
  위험 = danger_score_to_risk_level (count_danger_words(텍스트))
  위치.append((라트, LNG, 텍스트, 위험))
  latngs. append((lat, lng))
