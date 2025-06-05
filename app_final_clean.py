@@ -42,8 +42,9 @@ def get_lat_lng_kakao(주소):
  응답 = requests.get(url, 헤더=headers, 파람=파람)
  if response.status_code == 200이고 response.json ()['documents']:
  doc = 응답.json ()['documents'][0]
- 반환 플로트(doc[y']), 플로트(doc['x'])
+ 반환 플로트(doc[y']), 플로트(doc['x']) # 위도, 경도
  없음, 없음 반환
+
 
 # --------------------------
 # ✅ 스트림라이트 앱 실행
@@ -53,34 +54,34 @@ st.title("🚨 실시간 트윗 기반 침수 위험 지도")
 쿼리 = st.text_input (" 📍 트윗 키워드 입력", value="침수 OR 지하차도 OR 정전")
 
 if st.button("🚀 트윗 수집 및 분석 시작"):
- BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAABd%2B0gEAAAAAyCgw6GhEuAK8j1ly0OMJr5lI43g%3DG0XXqIF44Ay5dvDqNWaa6Gq6MtgWtu77WNhge4pSJnbYAnPiHz"
+ BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAABd%2B0gEAAAAAyCgw6GhEuAK8j1ly0OMJr5lI43g%3DG0XXQIF44Ay5dvDqNWaa6Gq6MtgWtu77WNhge4pSJnbYAnPiHz"
  헤더 = {"권한 부여": f"베어러 {BEARER_TOKEN}"}
  URL = "https://api.twitter.com/2/tweets/search/recent "
-    params = {
-        "query": f"({query}) lang:ko -is:retweet",
-        "max_results": 10,
-        "tweet.fields": "created_at,text"
-    }
+ 매개변수 = {
+ "query": f({query}) lang:ko -is:retweet",
+ "max_results": 10,
+ tweet.필드": "created_at,text"
+ }
 
-    response = requests.get(url, headers=headers, params=params)
-    if response.status_code != 200:
-        st.error("❌ 트윗 수집 실패")
-    else:
-        tweets = response.json().get("data", [])
-        locations, latlngs, texts, risks = [], [], [], []
-        okt = Okt()
+ 응답 = requests.get(url, 헤더=headers, 파람=파람)
+ if response.status_code!= 200:
+ st.error("❌ 트윗 수집 실패")
+ 그렇지 않으면:
+ 트윗 = 응답.json ().get ("data", [])
+ 위치, 선반, 텍스트, 위험 = [], [], [], []
+ okt = okt()
 
-        for tweet in tweets:
-            text = tweet['text']
-            nouns = okt.nouns(text)
-            filtered_nouns = [n for n in nouns if len(n) >= 2]
+ 트윗에 대한 트윗:
+ 텍스트 = 트윗 ['텍스트']
+ 명사 = okt.nouns(텍스트)
+ filtered_nouns = [명사에서 n의 경우 len(n) >= 2]
 
-            for noun in filtered_nouns:
-                lat, lng = get_lat_lng_kakao(noun)
-                if lat and lng:
-                    risk = danger_score_to_risk_level(count_danger_words(text))
-                    locations.append((lat, lng, text, risk))
-                    latlngs.append((lat, lng))
+ filtered_nouns의 명사에 대해:
+ lat, lng = get_lat_lng_kakao(noun)
+ lat 및 lng인 경우:
+ 위험 = danger_score_to_risk_level (count_danger_words(텍스트))
+ 위치.append((라트, LNG, 텍스트, 위험))
+ latngs. append((lat, lng))
                     texts.append(text)
                     risks.append(risk)
                     break
