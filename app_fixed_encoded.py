@@ -1,5 +1,5 @@
 
-[import streamlit as st
+import streamlit as st
 import pandas as pd
 import requests
 import time
@@ -109,4 +109,3 @@ if st.button("🚀 트윗 수집 및 분석 시작"):
         })
         st.subheader("📋 위험 분석 결과")
         st.dataframe(df)
-]
